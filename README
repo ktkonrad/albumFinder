@@ -1,0 +1,32 @@
+AlbumFinder
+version 0.1
+
+Kyle Konrad
+7/20/2011
+
+ABOUT:
+  AlbumFinder is a bare-bones web app that creates YouTube playlists for albums.
+
+SETUP:
+  In order to run AlbumFinder you need to:
+    1) Get the code
+    2) Install any dependencies (BeautifulSoup, web.py, gdata)
+    3) Get a Google API developer key and put it in a file called 'developer_key.txt' in the same directory as albumFinder.py
+    4) run with `./albumFinder.py 9000` where 9000 may be replaced by a port number of your choice - default is 8080
+
+USAGE:
+  Once the web service is running go to localhost:9000/playlist?artist=...&album=... where 9000 is replaced by the port you chose in step 4) abouve and artist and album are the album and artist you want to create a playlist for.
+
+LISCENCING:
+  This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
