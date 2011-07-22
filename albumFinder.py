@@ -48,6 +48,10 @@ class Playlist():
             one_time_token = params['token'][0]
             yt_service.SetAuthSubToken(one_time_token)
             session_token = yt_service.UpgradeToSessionToken()
+            if 'artist' not in params.keys():
+                return "please enter an artist"
+            if 'album' not in params.keys():
+                return "please enter an album"
             artist = params['artist'][0]
             album = params['album'][0]
             title = "%s %s" % (artist, album)
