@@ -10,7 +10,7 @@ TODO: make track name parsing from wikipedia more robust.
       beter yet, get track names from amazon instead
 """
 
-import wikipedia
+import amazon as amzn
 import youtube as yt
 
 import urllib, urlparse, re, web
@@ -19,6 +19,8 @@ import ConfigParser
 config = ConfigParser.ConfigParser()
 config.read('albumFinder.cfg')
 youtube = yt.Youtube(config.get('youtube', 'developer_key'))
+
+amazon = amzn.Amazon(config.get('amazon', 'aws_key'), config.get('amazon', 'secret_key'))
 
 urls = ['/playlist', 'Playlist']
 
@@ -57,8 +59,8 @@ class Playlist():
 
 
 def get_album_videos(artist, album):
-    """helper function to get track names from wikipedia and corresponding videos from youtube"""
-    tracks = wikipedia.get_tracks("%s %s album" % (artist, album))
+    """helper function to get track names from amazon and corresponding videos from youtube"""
+    tracks = amazon.get_tracks(album, artist)
     for track in tracks:
         video_id = youtube.query("%s %s" % (artist, track))
         if video_id:
