@@ -47,7 +47,10 @@ class Playlist():
         if 'token' in params.keys(): # we have a one time token
             one_time_token = params['token'][0]
             yt_service.SetAuthSubToken(one_time_token)
-            session_token = yt_service.UpgradeToSessionToken()
+            try:
+                session_token = yt_service.UpgradeToSessionToken()
+            except Exception as e:
+                return 'failed to created session token: %s' % str(e)
             if 'artist' not in params.keys():
                 return "please enter an artist"
             if 'album' not in params.keys():
