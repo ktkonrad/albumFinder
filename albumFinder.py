@@ -10,10 +10,15 @@ TODO: make track name parsing from wikipedia more robust.
       beter yet, get track names from amazon instead
 """
 
-import wikipedia, youtube
+import wikipedia
+import youtube as yt
 
 import urllib, urlparse, re, web
-from BeautifulSoup import BeautifulStoneSoup
+import ConfigParser
+
+config = ConfigParser.ConfigParser()
+config.read('albumFinder.cfg')
+youtube = yt.Youtube(config.get('youtube', 'developer_key'))
 
 urls = ['/playlist', 'Playlist']
 
