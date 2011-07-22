@@ -12,6 +12,7 @@ import gdata.youtube.service
 class Youtube():
     api_playlist_base = 'http://gdata.youtube.com/feeds/api/playlists/'
     playlist_base = 'http://youtube.com/playlist?list=PL'
+    authsubrequest_url = 'https://www.google.com/accounts/AuthSubRequest'
     
     def __init__(self, developer_key):
         self.yt_service = gdata.youtube.service.YouTubeService()
