@@ -11,7 +11,7 @@ SETUP:
   In order to run AlbumFinder you need to:
     1) Get the code
     2) Install any dependencies (BeautifulSoup, web.py, gdata)
-    3) Get a Google API developer key and put it in a file called 'developer_key.txt' in the same directory as albumFinder.py
+    3) Get a Google API developer key and put it in a file called 'albumFinder.cfg' in the same directory as albumFinder.py. See albumFinder.cfg.example for format.
     4) run with `./albumFinder.py 9000` where 9000 may be replaced by a port number of your choice - default is 8080
 
 USAGE:

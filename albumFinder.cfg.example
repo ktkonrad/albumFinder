@@ -1,0 +1,6 @@
+[youtube]
+developer_key = Google API key goes here
+
+[amazon]
+aws_key = AWS key goes here
+secret_key = AWS secret key goes here
