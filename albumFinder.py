@@ -63,7 +63,7 @@ class Playlist():
                 video_entry = yt_service.AddPlaylistVideoEntryToPlaylist(playlist_url, video_id)
             web.seeother(playlist_base + playlist_id)
         else: # get a one-time token
-            params = urllib.urlencode({'next' : 'http://localhost:9000%s' % web.ctx.fullpath, 'scope' : 'http://gdata.youtube.com', 'session' : '1', 'secure' : '0'})
+            params = urllib.urlencode({'next' : '%s%s' % (web.ctx.homedomain, web.ctx.fullpath), 'scope' : 'http://gdata.youtube.com', 'session' : '1', 'secure' : '0'})
             web.seeother("%s?%s" % (youtube.authsubrequest_url, params))
 
     POST = GET
