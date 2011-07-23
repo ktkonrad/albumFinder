@@ -10,6 +10,8 @@ class Amazon():
         self.api = amazonproduct.API(aws_key, secret_key, 'us')
 
     def get_tracks(self, album, artist):
+        """get track titles from amazon
+        returns a generator"""
         node = self.api.item_search('Music', Title=album, Artist=artist)
         album = node.Items.Item[0]
         detail_page_url = str(album.DetailPageURL)

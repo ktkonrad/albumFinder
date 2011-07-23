@@ -1,5 +1,7 @@
 $def with (form)
 
+<link rel="shortcut icon" href="favicon.ico"/>
+
 <form name="main" method="post"> 
 $if not form.valid: <p class="error">Fields cannot be blank:</p>
 $:form.render()

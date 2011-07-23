@@ -25,7 +25,8 @@ youtube = yt.Youtube(config.get('youtube', 'developer_key'))
 amazon = amzn.Amazon(config.get('amazon', 'aws_key'), config.get('amazon', 'secret_key'))
 
 urls = ['/', 'Index',
-        '/playlist', 'Playlist'
+        '/playlist', 'Playlist',
+        '/favicon.ico', 'Icon'
 ]
 
 app = web.application(urls, globals())
@@ -75,9 +76,13 @@ class Index():
             return render.form(form)
         else:
             playlist_params = urllib.urlencode({'album' : form.album.value, 'artist' : form.artist.value})
-            params = urllib.urlencode({'next' : '%s/playlist?%s' % (web.ctx.homedomain, playlist_params), 'scope' : 'http://gdata.youtube.com', 'session' : '1', 'secure' : '0'})
-            web.seeother("%s?%s" % (youtube.authsubrequest_url, params))
+            authsub_url = youtube.get_authsub_url('%s/playlist?%s' % (web.ctx.homedomain, playlist_params))
+            web.seeother(authsub_url)
 
+class Icon():
+    def GET(self):
+        web.header('Content-Type', 'image/x-icon')
+        return open('favicon.ico', 'rb').read()
 
 def get_album_videos(artist, album):
     """helper function to get track names from amazon and corresponding videos from youtube"""

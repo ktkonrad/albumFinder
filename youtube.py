@@ -50,3 +50,11 @@ class Youtube():
         playlist_url = Youtube.api_playlist_base + playlist_id
         video_entry = self.yt_service.AddPlaylistVideoEntryToPlaylist(playlist_url, video_id)
         #TODO: check success
+
+    def get_authsub_url(self, next):
+        """generate URL to get youtube AuthSub token
+        returns a string"""
+        scope = 'http://gdata.youtube.com'
+        secure = False
+        session = True
+        return str(self.yt_service.GenerateAuthSubURL(next, scope, secure, session))
