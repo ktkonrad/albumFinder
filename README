@@ -1,5 +1,5 @@
 AlbumFinder
-version 0.2
+version 0.2.1
 
 Kyle Konrad
 7/22/2011
@@ -16,7 +16,7 @@ SETUP:
     5) run with `./albumFinder.py 9000` where 9000 may be replaced by a port number of your choice - default is 8080
 
 USAGE:
-  Once the web service is running go to localhost:9000/playlist?artist=...&album=... where 9000 is replaced by the port you chose in step 4) abouve and artist and album are the album and artist you want to create a playlist for.
+  Once the web service is running go to localhost:9000 where 9000 is replaced by the port you chose in step 4) above. Enter and album and artist and submit. Grant access to YouTube when prompted.
 
 LICENSING:
   This program is free software: you can redistribute it and/or modify
