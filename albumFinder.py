@@ -62,8 +62,9 @@ class Playlist():
 
 
 album_artist_form = web.form.Form(
-    web.form.Textbox('album', web.form.notnull),
-    web.form.Textbox('artist', web.form.notnull))
+    web.form.Textbox('artist', web.form.notnull),
+    web.form.Textbox('album', web.form.notnull)
+)
         
 class Index():
     def GET(self):
