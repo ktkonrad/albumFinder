@@ -1,11 +1,18 @@
 $def with (form)
+<head>
+  <title>AlbumFinder</title>
+</head>
 
-<link rel="shortcut icon" href="favicon.ico"/>
+<body>
+  <link rel="shortcut icon" href="favicon.ico"/>
 
-<h1>AlbumFinder</h1>
-<p>Enter an artist and album to create a youtube playlist for that album.*</p>
-<form name="main" method="post"> 
-$if not form.valid: <p class="error">Fields cannot be blank:</p>
-$:form.render()
-<input type="submit" />    </form>
-<p style="font-size: 70%">*(Currently in alpha, don't expect everything to work)</p>
+  <h1>AlbumFinder</h1>
+  <p>Enter an artist and album to create a youtube playlist for that album.*</p>
+  <form name="main" method="post"> 
+    $if not form.valid: <p class="error">Fields cannot be blank:</p>
+    $:form.render()
+    <input type="submit" />    </form>
+  <p style="font-size: 70%">*(Currently in alpha, don't expect everything to work)</p>
+
+</body>
+
