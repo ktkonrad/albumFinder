@@ -1,7 +1,7 @@
 #!/usr/bin/env python2.6
 
 """
-AlbumFinder v0.2.1
+AlbumFinder v0.2.2
 
 AlbumFinder is a bare-bones web app to create YouTube playlists for albums
 Album info in fetched from Wikipedia
@@ -10,7 +10,7 @@ TODO: make track name parsing from wikipedia more robust.
       beter yet, get track names from amazon instead
 """
 
-version = '0.2.1'
+version = '0.2.2'
 
 import amazon as amzn
 import youtube as yt
