@@ -10,7 +10,12 @@ ABOUT:
 SETUP:
   In order to run AlbumFinder you need to:
     1) Get the code
-    2) Install any dependencies (BeautifulSoup, web.py, gdata)
+    2) Install dependencies:
+       a) easy_install python-amazon-product-api
+       b) easy_install BeautifulSoup
+       c) easy_install gdata
+       d) easy_install web.py
+       e) easy_install lxml (requires gcc and (libxml2-dev or libxslt-devel))
     3) Get a Google API developer key and Amazon AWS key and secret and put them in a file called 'albumFinder.cfg' in the same directory as albumFinder.py. See albumFinder.cfg.example for format.
     4) Make albumFinder.py executable by doing `chmod +x albumFinder.py`
     5) run with `./albumFinder.py 9000` where 9000 may be replaced by a port number of your choice - default is 8080
