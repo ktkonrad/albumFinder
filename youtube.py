@@ -27,7 +27,7 @@ class Youtube():
         query = gdata.youtube.service.YouTubeVideoQuery()
         query.vq = search_term
         feed = self.yt_service.YouTubeQuery(query)
-        return feed.entry[0].id.text
+        return feed.entry[0].id.text if len(feed.entry) > 0 else None
         
     def add_playlist(self, title, summary):
         """create a playlist and return its ID"""
