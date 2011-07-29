@@ -1,0 +1,3 @@
+#!/bin/bash
+
+./albumFinder.py 80 > logs/albumFinder.log 2> logs/albumFinder.raw.log &
