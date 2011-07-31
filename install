@@ -1,0 +1,11 @@
+#!/bin/bash
+
+apt-get install python-setuptools # get easy_install
+apt-get install python-dev # needed for lxml
+apt-get install libxml2-dev # needed for lxml
+
+easy_install python-amazon-product-api
+easy_install BeautifulSoup
+easy_install gdata
+easy_install web.py
+easy_install lxml
