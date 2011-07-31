@@ -14,8 +14,8 @@ version = '0.2.3'
 
 # api imports
 import amazonproduct
-#import gdata.youtube
-
+import gdata.youtube
+import gdata.service
 
 # local imports
 import amazon as amzn
@@ -34,14 +34,15 @@ youtube = yt.Youtube(config.get('youtube', 'developer_key'))
 amazon = amzn.Amazon(config.get('amazon', 'aws_key'), config.get('amazon', 'secret_key'))
 
 urls = ['/', 'Index',
-        '/playlist', 'Playlist',
+        '/create_playlist', 'CreatePlaylist',
+        '/show_playlist', 'ShowPlaylist',
         '/favicon.ico', 'Icon'
 ]
 
 app = web.application(urls, globals())
 render = web.template.render('templates/')
 
-class Playlist():
+class CreatePlaylist():
     def GET(self):
         """get one-time token from youtube, exchange for session token"""
         params = urlparse.parse_qs(web.ctx.query[1:])
@@ -62,7 +63,7 @@ class Playlist():
             playlist_id = youtube.add_playlist(title, summary)
             for video_id in get_album_videos(artist, album):
                 youtube.add_video_to_playlist(video_id, playlist_id)
-            web.seeother(youtube.playlist_base + playlist_id)
+            web.seeother("/show_playlist?playlist_id=%s" % playlist_id)
         except amazonproduct.api.NoExactMatchesFound as e:
             logger.log_error("not found: %s, %s" % (artist, album))
             return 'Sorry, that album could not be found.'
@@ -73,8 +74,16 @@ class Playlist():
             else:
                 logger.log_error(str(e))
                 raise e
-
     POST = GET
+
+class ShowPlaylist:
+    def GET(self):
+        params = urlparse.parse_qs(web.ctx.query[1:])
+        if 'playlist_id' not in params.keys():
+            return 'No playlist id given'
+        playlist_id = params['playlist_id'][0]
+
+        return render.playlist(playlist_id)
 
 
 album_artist_form = web.form.Form(
@@ -85,15 +94,15 @@ album_artist_form = web.form.Form(
 class Index():
     def GET(self):
         form = album_artist_form()
-        return render.form(form)
+        return render.index(form)
 
     def POST(self):
         form = album_artist_form()
         if not form.validates():
-            return render.form(form)
+            return render.index(form)
         else:
             playlist_params = urllib.urlencode({'album' : form.album.value, 'artist' : form.artist.value})
-            authsub_url = youtube.get_authsub_url('%s/playlist?%s' % (web.ctx.homedomain, playlist_params))
+            authsub_url = youtube.get_authsub_url('%s/create_playlist?%s' % (web.ctx.homedomain, playlist_params))
             web.seeother(authsub_url)
 
 class Icon():
