@@ -10,7 +10,7 @@ ABOUT:
 SETUP:
   In order to run AlbumFinder you need to:
     1) Get the code
-    2) Install dependencies:
+    2) Install dependencies. If your system supports aptitude you can just run the install script as root. Otherwise install the following dependencies:
        a) easy_install python-amazon-product-api
        b) easy_install BeautifulSoup
        c) easy_install gdata
