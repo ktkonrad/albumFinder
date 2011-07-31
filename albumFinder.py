@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.6
+#!/usr/bin/env python
 
 """
 AlbumFinder v0.2.3
@@ -14,7 +14,7 @@ version = '0.2.3'
 
 # api imports
 import amazonproduct
-import gdata.youtube
+#import gdata.youtube
 
 
 # local imports
