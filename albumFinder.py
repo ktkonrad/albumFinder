@@ -38,6 +38,7 @@ urls = ['/', 'Index',
         '/show_playlist', 'ShowPlaylist',
         '/favicon.ico', 'Icon'
 ]
+error_messages = [] # global array to hold error messages
 
 app = web.application(urls, globals())
 render = web.template.render('templates/')
@@ -63,20 +64,24 @@ class CreatePlaylist():
             album_videos = list(get_album_videos(artist, album))
         except amazonproduct.api.NoExactMatchesFound as e:
             logger.log_error("not found: %s, %s" % (artist, album))
-            return 'Sorry, that album could not be found.'
+            error_messages.append('Sorry, that album could not be found.')
+            return web.seeother('/')
 
         try:
             playlist_id = youtube.add_playlist(title, summary)
-            for video_id in album_videos_generator:
+            for video_id in album_videos:
                 youtube.add_video_to_playlist(video_id, playlist_id)
             web.seeother("/show_playlist?playlist_id=%s" % playlist_id)
         except gdata.service.RequestError as e:
             if re.search('Playlist already exists', str(e)):
                 logger.log_error("already exists: %s" % title)
-                return 'Sorry, that playlist already exists.'
+                error_messages.append('Sorry, that playlist already exists.')
+                # get playlist id and show it
             else:
                 logger.log_error(str(e))
                 raise e
+        web.seeother('/')
+
     POST = GET
 
 class ShowPlaylist:
@@ -85,26 +90,33 @@ class ShowPlaylist:
         if 'playlist_id' not in params.keys():
             return 'No playlist id given'
         playlist_id = params['playlist_id'][0]
-
-        return render.playlist(playlist_id)
+        return render.playlist(playlist_id, error_messages)
 
 
 album_artist_form = web.form.Form(
-    web.form.Textbox('artist', web.form.notnull),
-    web.form.Textbox('album', web.form.notnull)
+    web.form.Textbox('Artist', web.form.notnull),
+    web.form.Textbox('Album', web.form.notnull)
 )
         
 class Index():
     def GET(self):
+        global error_messages
+        temp = error_messages
+        error_messages = []
+
         form = album_artist_form()
-        return render.index(form)
+        return render.index(form, temp)
 
     def POST(self):
+        global error_messages
+        temp = error_messages
+        error_messages = []
+
         form = album_artist_form()
         if not form.validates():
-            return render.index(form)
+            return render.index(form, temp)
         else:
-            playlist_params = urllib.urlencode({'album' : form.album.value, 'artist' : form.artist.value})
+            playlist_params = urllib.urlencode({'album' : form.Album.value, 'artist' : form.Artist.value})
             authsub_url = youtube.get_authsub_url('%s/create_playlist?%s' % (web.ctx.homedomain, playlist_params))
             web.seeother(authsub_url)
 

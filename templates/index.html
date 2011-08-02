@@ -1,4 +1,4 @@
-$def with (form)
+$def with (form, error_messages)
 <head>
   <title>AlbumFinder</title>
   <script type="text/javascript">
@@ -12,15 +12,21 @@ $def with (form)
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
   </script>
+  <link rel="shortcut icon" href="favicon.ico"/>
+  <link rel="stylesheet" href="static/stylesheets/index.css"/>
 </head>
 
 <body>
-  <link rel="shortcut icon" href="favicon.ico"/>
-
   <h1>AlbumFinder</h1>
+  <br/>
+  <div class=errors>
+    $for error_message in error_messages
+      <p>
+        $:error_message
+      </p>
+  </div>
   <p>Enter an artist and album to create a youtube playlist for that album.*</p>
   <form name="main" method="post"> 
-    $if not form.valid: <p class="error">Fields cannot be blank:</p>
     $:form.render()
     <input type="submit" />    </form>
   <p style="font-size: 70%">*(Currently in alpha, don't expect everything to work)</p>

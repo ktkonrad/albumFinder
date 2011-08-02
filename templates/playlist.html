@@ -1,4 +1,4 @@
-$def with (playlist_id)
+$def with (playlist_id, error_messages)
 <head>
   <title>AlbumFinder</title>
   <script type="text/javascript">
@@ -12,11 +12,18 @@ $def with (playlist_id)
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
   </script>
+  <link rel="shortcut icon" href="favicon.ico"/>
 </head>
 
 <body>
   <h1>AlbumFinder</h1>
   <br/>
+  <div class=errors>
+    $for error_message in error_messages
+      <p>
+        $:error_message
+      </p>
+  </div>
   <object width="480" height="385"><param name="movie" value="http://www.youtube.com/p/$playlist_id?version=3&hl=en_US&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/p/$playlist_id?version=3&hl=en_US&fs=1" type="application/x-shockwave-flash" width="480" height="385" allowscriptaccess="always" allowfullscreen="true"></embed></object>
   <br/>
   <p>
